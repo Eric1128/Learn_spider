@@ -40,31 +40,31 @@ import re
 
 在线正则表达式：https://tool.oschina.net/regex
 '''
-# s1 = '玩儿吃鸡游戏，晚上一起上游戏，干嘛呢？打游戏啊'
-# print('贪狼模式：',re.findall(r'玩儿.*游戏',s1))
-# print('惰性模式：',re.findall(r'玩儿.*?游戏',s1))
+s1 = '玩儿吃鸡游戏，晚上一起上游戏，干嘛呢？打游戏啊'
+print('贪狼模式：',re.findall(r'玩儿.*游戏',s1))
+print('惰性模式：',re.findall(r'玩儿.*?游戏',s1))
 
 
 
 # #findall:匹配字符串中所有的符合正则的内容，返回list
-# li = re.findall(r"\d+","我的电话是10086，我女朋友的电话是10010")
-# print(li)
+li = re.findall(r"\d+","我的电话是10086，我女朋友的电话是10010")
+print(li)
 
 #finditer:匹配字符串中所有的内容，返回迭代器,从迭代器中拿到内容需要 .group()
-# rest = re.finditer(r"\d+","我的电话是10086，我女朋友的电话是10010")
-# for it in rest:
-#     print("电话:",it.group())
+rest = re.finditer(r"\d+","我的电话是10086，我女朋友的电话是10010")
+for it in rest:
+    print("电话:",it.group())
 
 #search:全文检索，找到一个结果就返回。返回Match对象，拿数据需要 .gruop()
-# rest = re.search(r"\d+","我的电话是10086，我女朋友的电话是10010")
-# print(rest.group())
+rest = re.search(r"\d+","我的电话是10086，我女朋友的电话是10010")
+print(rest.group())
 
 #match:从头开始匹配，返回Match对象。拿数据需要 .gruop()
-# rest = re.match(r"\d+","10086我的电话是10086，我女朋友的电话是10010")
-# print(rest.group())
+rest = re.match(r"\d+","10086我的电话是10086，我女朋友的电话是10010")
+print(rest.group())
 
 #预加载正则表达式,   re.S:让 . 能匹配换行符
-# obj = re.compile(r"<div class = '.*?'><span id = '\d+'>.*?</span></div>",re.S)
+obj = re.compile(r"<div class = '.*?'><span id = '\d+'>.*?</span></div>",re.S)
 
 
 s = '''
@@ -75,13 +75,13 @@ s = '''
 <div class = 'sde'><span id = '5'>白菜</span></div>
 '''
 
-# re_obj = re.compile(r"<div class = '.*?'><span id = '\d+'>.*?</span></div>",re.S)   #测试全部匹配 s
-# res = re_obj.finditer(s)
-# for item in res:
-#     print(item.group())
+re_obj = re.compile(r"<div class = '.*?'><span id = '\d+'>.*?</span></div>",re.S)   #测试全部匹配 s
+res = re_obj.finditer(s)
+for item in res:
+    print(item.group())
 
 #通过(?P<name>正则表达式)，提取想要的内容到name中
-# re_obj1 = re.compile(r"<div class = '(?P<name>.*?')><span id = '(?P<id>\d+)'>(?P<nr>.*?)</span></div>",re.S)
-# res1 = re_obj1.finditer(s)
-# for it in res1:
-#     print(it.group("name"),'---',it.group("id"),'---',it.group("nr"))
+re_obj1 = re.compile(r"<div class = '(?P<name>.*?')><span id = '(?P<id>\d+)'>(?P<nr>.*?)</span></div>",re.S)
+res1 = re_obj1.finditer(s)
+for it in res1:
+    print(it.group("name"),'---',it.group("id"),'---',it.group("nr"))
