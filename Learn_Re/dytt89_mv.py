@@ -13,6 +13,8 @@ resp = requests.get(f_url,headers=headers,verify=False)   #verify=False 去掉�
 resp.encoding='gb2312'     # 指定字符集
 
 html_ydm = resp.text
+resp.close()
+
 obj = re.compile(r'2021必看热片.*?<ul>(?P<li>.*?)</ul>',re.S)
 obj1 = re.compile(r"<a href='(?P<sub_url>.*?)'",re.S)
 obj3 = re.compile(r'◎译　　名　(?P<yiming>.*?)<br />'
@@ -33,9 +35,9 @@ for u in child_url_list:
     child_resp = requests.get(u,headers=headers,verify=False)
     child_resp.encoding = 'gb2312'
     child_ydm = child_resp.text
+    child_resp.close()
     child_result = obj3.search(child_ydm)
     dic = child_result.groupdict()
     csv_w.writerow(dic.values())
-
 f.close()
 print('over')
