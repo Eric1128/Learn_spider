@@ -20,7 +20,7 @@ data = page.find('div',attrs={"class":"co_content222"})  # 与上一行的表达
 li_list = data.find_all('li')[1:]
 url_list = []
 for li in li_list:
-    url1 = li.find('a').get('href')   #通过get 可以直接拿到标签中的属性值
+    url1 = li.find('a').get('href')   #通过get 可以直接拿到标签中的属性值，如果是获取a标签中的文本，直接.text 就可以获取到
     url_list.append(f_url.strip('/')+url1)    #将连接装填到rul_list 中
 
 #循环子页面Url 列表，进子页面请求
