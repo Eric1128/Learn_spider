@@ -19,7 +19,8 @@ f = open('zbj.csv',mode='a',encoding='utf8')
 csv_w = csv.writer(f)
 for div in div_list:
     company_nane = div.xpath('.//a[@class="service-bottom-wrap j_ocpc"]/div[1]/p/text()')[1].strip('\n\n')    #./ :代表当前路径  ,通过 text() 获取标签中的文本内容
-    company_addr = div.xpath('.//a[@class="service-bottom-wrap j_ocpc"]/div[1]/div/span/text()')[0]   #./ :代表当前路径
+    company_addr = div.xpath('.//a[@class="service-bottom-wrap j_ocpc"]/div[1]/div/span/text()')
+    company_addr = 'None' if not company_addr else company_addr[0] 
     company_img = div.xpath('.//a[@class="service-top-wrap j_ocpc"]//div[@class="carousel-wrap"]/div[1]/img/@data-original')[0]  #通过 @属性获取属性值
     title = 'saas'.join(div.xpath('.//a[@class="service-top-wrap j_ocpc"]//div[@class="service-title"]/p/text()'))
     price = div.xpath('.//a[@class="service-top-wrap j_ocpc"]//span[@class="price"]/text()')[0]
