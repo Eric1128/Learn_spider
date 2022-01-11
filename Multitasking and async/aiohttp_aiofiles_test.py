@@ -28,7 +28,7 @@ async def download_txt(url,name):
             #     for p in p_list:
             #         f.writelines(p.xpath('./text()')[0]+ '\n')
             # 异步写入
-            async with aiofiles.open('book/{}.txt'.format(name),mode='w+',encoding='utf-8') as f:
+            async with aiofiles.open('book/{}.txt'.format(name),mode='w+',encoding='utf-8') as f:   #异步写入
                 for p in p_list:
                      await f.writelines(p.xpath('./text()')[0]+ '\n')
     print(name,'Over!!!!')
