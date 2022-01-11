@@ -18,15 +18,21 @@ async def download_img(url):
         s = aiohttp.ClientSession()   等价于 requests
         s.get()   等价于  requests.get()
         s.post()   等价于  requests.post()
+        headers 参数，添加请求头
+        params 参数，GET请求参数
+        data 参数，POST的body
+        porxy 参数，代理相关
+    '''
     '''
     img_name = url.rsplit('/',1)[-1]
     async with aiohttp.ClientSession() as session:  #固定搭配，加with 不用考虑session.close()
         async with session.get(url,headers=headers) as resp:    #发起请求
-            #resp.text()     # 等于 requests 中的 resp.test
+            #resp.text()     # 等于 requests 中的 resp.test  
             #resp.json()     # 等于 requests 中的 resp.json()
+            #resp.content.read()  等于 requests 中的 resp.resp.content
+            #获取如上响应数据之前一定要使用 await 进行手动挂起
             with open('img/{}'.format(img_name),mode='wb') as f:   #创建文件，  可以使用 aiofiles 模块异步操作
-                f.write(await resp.content.read())      #resp.content.read()  等于 requests 中的 resp.resp.content
-
+                f.write(await resp.content.read())      
     print(url,'搞定')
 async def main():
     tasks=[]
