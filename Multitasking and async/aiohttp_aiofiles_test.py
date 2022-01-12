@@ -38,7 +38,7 @@ async def main(main_url):   #创建异步任务
     resp.encoding = 'UTF-8'
     html = etree.HTML(resp.text)
     resp.close()
-    a_list = html.xpath('//ul[@class="catalog"][1]//a')
+    a_list = html.xpath('//ul[@class="catalog"]')[0].xpath('.//a')
     tasks = []
     for a in a_list:
         name = a.xpath('./text()')[0]
