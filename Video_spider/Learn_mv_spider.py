@@ -1,5 +1,6 @@
 import requests
 import re
+import os
 '''
 流程：
     1、请求页面获取M3U8文件URL
@@ -31,6 +32,7 @@ with open('mv.m3u8',mode='r',encoding='utf-8') as f:
     n=1    #设置初始值，用于文件命名
     for line in f:
         line = line.strip()
+        ts_list = []   #存放文件名的list
         if not line.startswith("#"):
             resp = requests.get(line,headers=headers)
             f1 = open('video/{}.ts'.format(n),mode='wb')
@@ -38,4 +40,12 @@ with open('mv.m3u8',mode='r',encoding='utf-8') as f:
             f1.close()
             resp.close()
             print(n,'Over!!!!')
+            ts_list.append("video/{}.ts".format(n))
             n += 1
+        #Windows 电脑 合并视屏，代码如下:
+        s = '+'.join(ts_list)
+        os.system("copy /b {} aaa.mp4".format(s))     #合并视屏
+        
+        #MAC 电脑 合并视屏，代码如下:
+        # s = ' '.join(ts_list)
+        # os.system("cat {} > aaa.mp4".format(s))
