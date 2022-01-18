@@ -35,6 +35,7 @@ import time
 options = Options()
 options.add_experimental_option('excludeSwitches', ['enable-automation'])  #防止被检测，取消浏览器的 ：Chrome 正受到自动检测软件的控制
 options.add_experimental_option('useAutomationExtension', False)    #防止被检测，取消浏览器的 ：Chrome 正受到自动检测软件的控制
+options.add_argument('--disable-blink-features=AutomationControlled')    #设置 ：window.navigator.webdriver =False
 
 web = Chrome(options=options)
 web.get("https://www.lagou.com/")
